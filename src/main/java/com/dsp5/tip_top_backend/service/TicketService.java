@@ -10,5 +10,7 @@ public interface TicketService {
     Ticket getTicketById(Long idTicket);
     Ticket saveTicket(Ticket t);
     List<Ticket> getAllTicket();
+    List<Ticket> getAllTicketOfClient(Long idClient);
+    List<Ticket> getAllTicketOfGain(Long idGain);
 
 }
