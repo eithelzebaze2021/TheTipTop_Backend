@@ -3,6 +3,8 @@ package com.dsp5.tip_top_backend.service.service_impl;
 import com.dsp5.tip_top_backend.model.Magasin;
 import com.dsp5.tip_top_backend.repository.MagasinRepo;
 import com.dsp5.tip_top_backend.service.MagasinService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,8 @@ import java.util.Optional;
 
 @Service @Transactional
 public class MagasinServiceImpl implements MagasinService {
+
+    private final Logger log = LogManager.getLogger("MAGASIN SERVICE");
 
     @Autowired
     private MagasinRepo magasinRepo;

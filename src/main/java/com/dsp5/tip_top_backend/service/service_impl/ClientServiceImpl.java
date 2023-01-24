@@ -21,6 +21,8 @@ import java.util.List;
 @Service @Transactional
 public class ClientServiceImpl implements ClientService {
 
+    private final Logger log = LogManager.getLogger("Client SERVICE");
+
     @Autowired
     private ClientRepo clientRepo;
 
@@ -29,8 +31,6 @@ public class ClientServiceImpl implements ClientService {
 
     @Autowired
     private GainRepo gainRepo;
-
-    private final Logger log = LogManager.getLogger("CLIENT SERVICE");
 
     @Override
     public Client getClientById(Long idClient) {

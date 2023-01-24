@@ -17,13 +17,14 @@ import java.util.Optional;
 @Service @Transactional
 public class EmployeServiceImpl implements EmployeService {
 
+    private final Logger log = LogManager.getLogger("EMPLOYE SERVICE");
+
     @Autowired
     private EmployeRepo employeRepo;
 
     @Autowired
     private MagasinRepo magasinRepo;
 
-    private final Logger log = LogManager.getLogger("EMPLOYE SERVICE");
     @Override
     public Employe getEmployeById(Long idEmploye) {
         return employeRepo.findById(idEmploye).get();

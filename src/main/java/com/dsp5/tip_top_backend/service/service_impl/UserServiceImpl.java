@@ -16,13 +16,13 @@ import java.util.Optional;
 @Service @Transactional
 public class UserServiceImpl implements UserService {
 
+    private final Logger log = LogManager.getLogger("USER SERVICE");
+
     @Autowired
     private UtilisateurRepo userRepo;
 
     @Autowired
     private RoleRepo roleRepo;
-
-    private final Logger log = LogManager.getLogger("USER SERVICE");
 
     @Override
     public Utilisateur getUserById(Long idUser) {

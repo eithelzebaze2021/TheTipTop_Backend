@@ -11,5 +11,6 @@ public interface GainService {
     Gain saveGain(Gain G);
     Boolean UpdateGainTicketRestant(Long idGain, Long nbreTicketRestant);
     List<Gain> getAllGain();
+    List<Gain> getAllGainDispo();
 
 }

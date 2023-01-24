@@ -1,7 +1,5 @@
 package com.dsp5.tip_top_backend.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
