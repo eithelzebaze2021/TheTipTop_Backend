@@ -1,5 +1,6 @@
 package com.dsp5.tip_top_backend.service.service_impl;
 
+import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.repository.RoleRepo;
 import com.dsp5.tip_top_backend.repository.UtilisateurRepo;
@@ -31,13 +32,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Utilisateur getUserByMail(String mail) {
-        return userRepo.findByMail(mail);
+        return userRepo.findByMail(mail).get();
     }
 
     @Override
     public Boolean saveUser(Utilisateur u) {
 
         if(userRepo.save(u)!=null){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean saveRole(Role r) {
+        if(roleRepo.save(r)!=null){
             return true;
         }
         return false;
@@ -75,7 +84,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean updateRole(Long idUser, Long idRole) {
+    public Boolean updateRoleUser(Long idUser, Long idRole) {
 
         Utilisateur user = userRepo.findById(idUser).get();
 

@@ -1,6 +1,13 @@
 package com.dsp5.tip_top_backend.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+
+import java.util.Collection;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -11,7 +18,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
                 @UniqueConstraint(name = "user_mail_unique", columnNames = "mail")
         }
 )
-public class Utilisateur {
+public class Utilisateur implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -27,10 +34,10 @@ public class Utilisateur {
     )
     private Long idUser;
     @Column(
-            name = "id_role",
+            name = "role",
             nullable = false
     )
-    private Long idRole;
+    private String role;
     @Column(
             name = "nom",
             nullable = false,
@@ -73,9 +80,9 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(Long idUser, Long idRole, String nom, String prenom, String adresse, String code_postal, String mail, String password) {
+    public Utilisateur(Long idUser, String role, String nom, String prenom, String adresse, String code_postal, String mail, String password) {
         this.idUser = idUser;
-        this.idRole = idRole;
+        this.role = role;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -84,10 +91,10 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public Utilisateur(Long idRole, String nom,
+    public Utilisateur(String role, String nom,
                        String prenom, String adresse, String code_postal,
                        String mail, String password) {
-        this.idRole = idRole;
+        this.role = role;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -104,12 +111,12 @@ public class Utilisateur {
         this.idUser = idUser;
     }
 
-    public Long getIdRole() {
-        return idRole;
+    public String getIdRole() {
+        return role;
     }
 
     public void setIdRole(Long idRole) {
-        this.idRole = idRole;
+        this.role = role;
     }
 
     public String getNom() {
@@ -152,11 +159,44 @@ public class Utilisateur {
         this.mail = mail;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return List.of(new SimpleGrantedAuthority(role));
     }
+
+    @Override
+    public String getUsername() {
+        return this.mail;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
 }
