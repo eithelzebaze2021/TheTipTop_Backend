@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserService {
     Utilisateur getUserById(Long idUser);
     Utilisateur getUserByMail(String idMail);
-    Utilisateur saveUser(Utilisateur u);
+    Boolean saveUser(Utilisateur u);
     Boolean UpdateUserInfo(Utilisateur u);
     Boolean UpdateUserIdentification(Long idUser, String mail, String password);
     Boolean updateRole(Long idUser,Long idRole);

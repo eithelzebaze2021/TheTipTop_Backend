@@ -34,11 +34,13 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client getClientById(Long idClient) {
+        log.debug("Trouver le client dont l'idClient est : {} ", idClient);
         return clientRepo.findById(idClient).get();
     }
 
     @Override
     public Client saveClient(Client c) {
+        log.debug("Enregistrer le client dont le mail est : {}", c.getUser_client().getMail());
         return clientRepo.save(c);
     }
 

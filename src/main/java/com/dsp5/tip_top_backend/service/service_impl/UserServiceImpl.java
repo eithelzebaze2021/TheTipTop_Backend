@@ -35,8 +35,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Utilisateur saveUser(Utilisateur u) {
-        return userRepo.save(u);
+    public Boolean saveUser(Utilisateur u) {
+
+        if(userRepo.save(u)!=null){
+            return true;
+        }
+        return false;
     }
 
     @Override
