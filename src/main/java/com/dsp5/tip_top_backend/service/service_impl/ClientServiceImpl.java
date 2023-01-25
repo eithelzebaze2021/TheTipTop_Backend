@@ -39,9 +39,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client saveClient(Client c) {
+    public Boolean saveClient(Client c) {
         log.debug("Enregistrer le client dont le mail est : {}", c.getUser_client().getMail());
-        return clientRepo.save(c);
+
+        if(clientRepo.save(c)!=null){
+            return true;
+        }
+        return false;
     }
 
     @Override
