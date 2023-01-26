@@ -1,6 +1,6 @@
 package com.dsp5.tip_top_backend.security;
 
-/*import com.dsp5.tip_top_backend.model.Utilisateur;
+import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.repository.UtilisateurRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,4 +19,4 @@ public class UtilisateurDetailsService implements UserDetailsService {
 
         return userRepo.findByMail(username).get();
     }
-}*/
+}

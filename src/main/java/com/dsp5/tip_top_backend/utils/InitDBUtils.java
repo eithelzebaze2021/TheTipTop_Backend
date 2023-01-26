@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
-public class InitDBService implements CommandLineRunner {
+public class InitDBUtils implements CommandLineRunner {
 
     //private final PasswordEncoder passwordEncoder;
 

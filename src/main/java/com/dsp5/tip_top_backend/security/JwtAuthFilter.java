@@ -1,6 +1,10 @@
 package com.dsp5.tip_top_backend.security;
 
-/*import org.springframework.lang.NonNull;
+import com.dsp5.tip_top_backend.utils.JwtUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -13,7 +17,11 @@ import java.io.IOException;
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
 
+    @Autowired
+    private JwtUtils jwtUtils;
 
+    @Autowired
+    private UtilisateurDetailsService utilisateurDetailsService;
 
     @Override
     protected void doFilterInternal(
@@ -29,9 +37,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }
 
+        assert authHeader != null;
         jwtToken = authHeader.substring(7);
 
-        //userMail = //TODO
+        userMail = jwtUtils.extractUserName(jwtToken);
+
+        if(userMail!=null){
+            UserDetails userDetail = utilisateurDetailsService.loadUserByUsername(userMail);
+            Boolean isTokenValid = jwtUtils.isTokenValid(jwtToken, userDetail);
+            if(isTokenValid){
+                UsernamePasswordAuthenticationToken authToken =
+                        new UsernamePasswordAuthenticationToken(userDetail, null);
+            }
+
+        }
 
     }
-}*/
+}

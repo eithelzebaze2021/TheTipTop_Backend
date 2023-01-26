@@ -1,4 +1,4 @@
-/*package com.dsp5.tip_top_backend.security;
+package com.dsp5.tip_top_backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,5 +23,5 @@ public class CorsConfig implements WebMvcConfigurer {
         };
     }
 
-}*/
+}
 
