@@ -1,4 +1,4 @@
-/*package com.dsp5.tip_top_backend.security;
+package com.dsp5.tip_top_backend.security;
 
 import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.repository.UtilisateurRepo;
@@ -17,6 +17,6 @@ public class UtilisateurDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        return new UtilisateurDetail(new Utilisateur());
+        return userRepo.findByMail(username).get();
     }
-}*/
+}

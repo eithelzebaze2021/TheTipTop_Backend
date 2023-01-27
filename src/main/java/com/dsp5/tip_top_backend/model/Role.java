@@ -8,7 +8,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Role")
 @Table(
-        name = "role"
+        name = "role",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "user_nom_unique", columnNames = "nom")
+        }
 )
 public class Role {
 
@@ -41,6 +44,12 @@ public class Role {
     private List<Utilisateur> userList = new ArrayList<>();
 
     public Role() {
+    }
+
+    public Role(String nom) {
+        this.idRole = idRole;
+        this.nom = nom;
+        this.userList = userList;
     }
 
     public Role(Integer idRole, String nom, List<Utilisateur> userList) {

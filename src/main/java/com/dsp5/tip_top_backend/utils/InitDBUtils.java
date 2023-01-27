@@ -1,4 +1,4 @@
-/*package com.dsp5.tip_top_backend.service;
+package com.dsp5.tip_top_backend.utils;
 
 import com.dsp5.tip_top_backend.model.*;
 import com.dsp5.tip_top_backend.repository.*;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 
 @Service
-public class InitDBService implements CommandLineRunner {
+public class InitDBUtils implements CommandLineRunner {
 
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UtilisateurRepo userRepo;
@@ -29,30 +29,30 @@ public class InitDBService implements CommandLineRunner {
     @Autowired
     public MagasinRepo magasinRepo;
 
-    public InitDBService(PasswordEncoder passwordEncoder) {
+    /*public InitDBService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
-    }
+    }*/
 
     @Override
     public void run(String... args) throws Exception {
 
         //Init Role
-        Role role1 = new Role("client");
-        Role role2 = new Role("employe");
-        Role role3 = new Role("admin");
+        Role role1 = new Role("ROLE_CLIENT");
+        Role role2 = new Role("ROLE_EMPLOYE");
+        Role role3 = new Role("ROLE_ADMIN");
         this.roleRepo.saveAll(Arrays.asList(role1,role2,role3));
 
         //Init user
-        Utilisateur user1 = new Utilisateur(1,"Zebaze","Eithel","France",
-                "95","eithel.zebaze@gmail.com",passwordEncoder.encode("eithelPassword"));
-        Utilisateur user2 = new Utilisateur(1,"Fopa","Armelle","France",
-                "93","armelle.fopa@gmail.com",passwordEncoder.encode("armellePassword"));
-        Utilisateur user3 = new Utilisateur(1,"Donna","Stephane","France",
-                "75","stephane.donna@gmail.com",passwordEncoder.encode("StephanePassword"));
-        Utilisateur user4 = new Utilisateur(2,"employe","employe","Nice",
-                "75","employe@gmail.com",passwordEncoder.encode("EmployePassword"));
-        Utilisateur user5 = new Utilisateur(3,"admin","admin","France",
-                "75","admin@gmail.com",passwordEncoder.encode("AdminPassword"));
+        Utilisateur user1 = new Utilisateur(role1.getNom(),"Zebaze","Eithel","France",
+                "95","eithel.zebaze@gmail.com","1234");
+        Utilisateur user2 = new Utilisateur(role1.getNom(),"Fopa","Armelle","France",
+                "93","armelle.fopa@gmail.com","1234");
+        Utilisateur user3 = new Utilisateur(role1.getNom(),"Donna","Stephane","France",
+                "75","stephane.donna@gmail.com","1234");
+        Utilisateur user4 = new Utilisateur(role2.getNom(),"employe","employe","Nice",
+                "75","employe@gmail.com","1234");
+        Utilisateur user5 = new Utilisateur(role3.getNom(),"admin","admin","France",
+                "75","admin@gmail.com","1234");
         this.userRepo.save(user5);
 
         //Init Client
@@ -68,6 +68,5 @@ public class InitDBService implements CommandLineRunner {
         Employe employe1 = new Employe(magasin1,user4);
         this.employeRepo.save(employe1);
 
-
     }
-}*/
+}
