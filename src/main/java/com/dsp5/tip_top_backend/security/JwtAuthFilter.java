@@ -4,7 +4,9 @@ import com.dsp5.tip_top_backend.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -35,22 +37,25 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if(authHeader == null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request, response);
+            return;
         }
 
-        assert authHeader != null;
         jwtToken = authHeader.substring(7);
 
         userMail = jwtUtils.extractUserName(jwtToken);
 
-        if(userMail!=null){
+        if(userMail!=null && SecurityContextHolder.getContext().getAuthentication() == null){
             UserDetails userDetail = utilisateurDetailsService.loadUserByUsername(userMail);
-            Boolean isTokenValid = jwtUtils.isTokenValid(jwtToken, userDetail);
-            if(isTokenValid){
+            if(jwtUtils.isTokenValid(jwtToken, userDetail)){
                 UsernamePasswordAuthenticationToken authToken =
-                        new UsernamePasswordAuthenticationToken(userDetail, null);
+                        new UsernamePasswordAuthenticationToken(userDetail, null, userDetail.getAuthorities());
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
             }
 
         }
+
+        filterChain.doFilter(request, response);
 
     }
 }
