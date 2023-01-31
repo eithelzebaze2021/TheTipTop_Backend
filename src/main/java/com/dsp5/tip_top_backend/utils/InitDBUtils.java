@@ -31,10 +31,6 @@ public class InitDBUtils implements CommandLineRunner {
     @Autowired
     public MagasinRepo magasinRepo;
 
-    /*public InitDBService(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }*/
-
     @Override
     public void run(String... args) throws Exception {
 

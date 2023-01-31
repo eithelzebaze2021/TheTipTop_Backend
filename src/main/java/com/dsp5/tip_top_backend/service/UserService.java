@@ -3,6 +3,7 @@ package com.dsp5.tip_top_backend.service;
 import com.dsp5.tip_top_backend.utils.LoginRequest;
 import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
+import com.dsp5.tip_top_backend.utils.LoginResponse;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface UserService {
     Boolean UpdateUserIdentification(Long idUser, String mail, String password);
     Boolean updateRoleUser(Long idUser,Long idRole);
     List<Utilisateur> getAllUser();
-    String login(LoginRequest loginRequest);
+    LoginResponse login(LoginRequest loginRequest);
 }

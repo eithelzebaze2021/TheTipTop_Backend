@@ -2,7 +2,7 @@ package com.dsp5.tip_top_backend.utils;
 
 public class LoginRequest {
     private String email;
-    String password;
+    private String password;
 
     public LoginRequest() {
     }
