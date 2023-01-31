@@ -4,6 +4,7 @@ import com.dsp5.tip_top_backend.utils.LoginRequest;
 import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.service.UserService;
+import com.dsp5.tip_top_backend.utils.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,8 +68,8 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
-        return ResponseEntity.ok(userService.login(loginRequest));
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
+        return new ResponseEntity<>(userService.login(loginRequest),HttpStatus.ACCEPTED);
     }
 
 

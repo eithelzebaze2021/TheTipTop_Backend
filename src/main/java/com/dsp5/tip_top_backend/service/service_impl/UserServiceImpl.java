@@ -7,6 +7,7 @@ import com.dsp5.tip_top_backend.repository.RoleRepo;
 import com.dsp5.tip_top_backend.repository.UtilisateurRepo;
 import com.dsp5.tip_top_backend.service.UserService;
 import com.dsp5.tip_top_backend.utils.JwtUtils;
+import com.dsp5.tip_top_backend.utils.LoginResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,16 +124,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(LoginRequest loginRequest) {
+    public LoginResponse login(LoginRequest loginRequest) {
         System.out.println("************** see");
+        LoginResponse token = new LoginResponse();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequest.getEmail(), loginRequest.getPassword()));
         UserDetails user = userRepo.findByMail(loginRequest.getEmail()).orElseThrow( () -> new UsernameNotFoundException("User not found"));
         if(user != null){
-            System.out.println("**************"+user.getUsername());
-            return jwtUtils.generateToken(user);
+            token.setToken(jwtUtils.generateToken(user));
+            return token;
         }
-       return "Error found";
+       return token;
     }
 
     @Bean

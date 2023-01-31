@@ -39,7 +39,7 @@ public class JwtUtils {
                 .parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 
@@ -52,6 +52,7 @@ public class JwtUtils {
                 .builder()
                 .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
+                .claim("authorities",userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)

@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/api-tip-top-G1/user/login").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
