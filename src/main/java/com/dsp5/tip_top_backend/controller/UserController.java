@@ -1,5 +1,6 @@
 package com.dsp5.tip_top_backend.controller;
 
+import com.dsp5.tip_top_backend.utils.LoginRequest;
 import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.service.UserService;
@@ -62,6 +63,12 @@ public class UserController {
             return ResponseEntity.badRequest().body(false);
         }
 
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+        return ResponseEntity.ok(userService.login(loginRequest));
     }
 
 

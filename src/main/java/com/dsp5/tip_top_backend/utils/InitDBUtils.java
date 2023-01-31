@@ -4,7 +4,7 @@ import com.dsp5.tip_top_backend.model.*;
 import com.dsp5.tip_top_backend.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -12,7 +12,9 @@ import java.util.Arrays;
 @Service
 public class InitDBUtils implements CommandLineRunner {
 
-    //private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public UtilisateurRepo userRepo;
@@ -44,15 +46,15 @@ public class InitDBUtils implements CommandLineRunner {
 
         //Init user
         Utilisateur user1 = new Utilisateur(role1.getNom(),"Zebaze","Eithel","France",
-                "95","eithel.zebaze@gmail.com","1234");
+                "95","eithel.zebaze@gmail.com", passwordEncoder.encode("1234"));
         Utilisateur user2 = new Utilisateur(role1.getNom(),"Fopa","Armelle","France",
-                "93","armelle.fopa@gmail.com","1234");
+                "93","armelle.fopa@gmail.com",passwordEncoder.encode("1234"));
         Utilisateur user3 = new Utilisateur(role1.getNom(),"Donna","Stephane","France",
-                "75","stephane.donna@gmail.com","1234");
+                "75","stephane.donna@gmail.com",passwordEncoder.encode("1234"));
         Utilisateur user4 = new Utilisateur(role2.getNom(),"employe","employe","Nice",
-                "75","employe@gmail.com","1234");
+                "75","employe@gmail.com",passwordEncoder.encode("1234"));
         Utilisateur user5 = new Utilisateur(role3.getNom(),"admin","admin","France",
-                "75","admin@gmail.com","1234");
+                "75","admin@gmail.com",passwordEncoder.encode("1234"));
         this.userRepo.save(user5);
 
         //Init Client
