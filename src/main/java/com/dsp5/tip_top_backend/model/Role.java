@@ -35,13 +35,13 @@ public class Role {
     )
     private String nom;
 
-    @OneToMany(
+    /*@OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "id_role")
-    private List<Utilisateur> userList = new ArrayList<>();
+    private List<Utilisateur> userList = new ArrayList<>();*/
 
     public Role() {
     }
@@ -49,13 +49,13 @@ public class Role {
     public Role(String nom) {
         this.idRole = idRole;
         this.nom = nom;
-        this.userList = userList;
+        //this.userList = userList;
     }
 
-    public Role(Integer idRole, String nom, List<Utilisateur> userList) {
+    public Role(Integer idRole, String nom) {
         this.idRole = idRole;
         this.nom = nom;
-        this.userList = userList;
+        //this.userList = userList;
     }
 
     public Integer getIdRole() {
@@ -74,11 +74,11 @@ public class Role {
         this.nom = nom;
     }
 
-    public List<Utilisateur> getUserList() {
+    /*public List<Utilisateur> getUserList() {
         return userList;
     }
 
     public void setUserList(List<Utilisateur> userList) {
         this.userList = userList;
-    }
+    }*/
 }

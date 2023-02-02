@@ -111,11 +111,11 @@ public class Utilisateur implements UserDetails {
         this.idUser = idUser;
     }
 
-    public String getIdRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setIdRole(Long idRole) {
+    public void setRole(String role) {
         this.role = role;
     }
 

@@ -105,12 +105,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean updateRoleUser(Long idUser, Long idRole) {
+    public Boolean updateRoleUser(Long idUser, Integer idRole) {
 
         Utilisateur user = userRepo.findById(idUser).get();
+        Role role = roleRepo.findById(idRole).get();
 
         if(user != null){
-            user.setIdRole(idRole);
+            user.setRole(role.getNom());
             userRepo.save(user);
             return true;
         }
@@ -125,13 +126,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        System.out.println("************** see");
         LoginResponse token = new LoginResponse();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequest.getEmail(), loginRequest.getPassword()));
         UserDetails user = userRepo.findByMail(loginRequest.getEmail()).orElseThrow( () -> new UsernameNotFoundException("User not found"));
         if(user != null){
             token.setToken(jwtUtils.generateToken(user));
+            token.setUser(user);
             return token;
         }
        return token;

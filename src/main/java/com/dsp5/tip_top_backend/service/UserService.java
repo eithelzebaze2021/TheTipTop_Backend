@@ -14,7 +14,7 @@ public interface UserService {
     Boolean saveRole(Role r);
     Boolean UpdateUserInfo(Utilisateur u);
     Boolean UpdateUserIdentification(Long idUser, String mail, String password);
-    Boolean updateRoleUser(Long idUser,Long idRole);
+    Boolean updateRoleUser(Long idUser,Integer idRole);
     List<Utilisateur> getAllUser();
     LoginResponse login(LoginRequest loginRequest);
 }

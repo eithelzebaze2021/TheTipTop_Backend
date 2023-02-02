@@ -1,11 +1,16 @@
 package com.dsp5.tip_top_backend.utils;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 public class LoginResponse {
 
     private String token;
 
-    public LoginResponse(String token) {
+    private UserDetails user;
+
+    public LoginResponse(String token, UserDetails user) {
         this.token = token;
+        this.user = user;
     }
 
     public LoginResponse() {
@@ -17,5 +22,13 @@ public class LoginResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public UserDetails getUser() {
+        return user;
+    }
+
+    public void setUser(UserDetails user) {
+        this.user = user;
     }
 }

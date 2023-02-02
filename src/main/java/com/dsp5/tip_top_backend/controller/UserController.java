@@ -1,5 +1,6 @@
 package com.dsp5.tip_top_backend.controller;
 
+import com.dsp5.tip_top_backend.utils.JwtUtils;
 import com.dsp5.tip_top_backend.utils.LoginRequest;
 import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
@@ -8,6 +9,7 @@ import com.dsp5.tip_top_backend.utils.LoginResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,9 +22,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @GetMapping("/getAllUser")
     public ResponseEntity<List<Utilisateur>>getAllUser(){
-        return new ResponseEntity<>(userService.getAllUser(), HttpStatus.ACCEPTED);
+
+        UserDetails user = jwtUtils.getUserFromToken();
+
+        if(user.getAuthorities().stream().toList().get(0).equals("ROLE_ADMIN")){
+            return new ResponseEntity<>(userService.getAllUser(), HttpStatus.ACCEPTED);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
     @GetMapping("/getUserById/{idU}")
@@ -56,7 +68,7 @@ public class UserController {
 
     @PostMapping("/updateRoleUser/{idU}/{idR}")
     public ResponseEntity<Boolean>updateRoleUser(@PathVariable("idU") Long idUser,
-                                                 @PathVariable("idR") Long idRole){
+                                                 @PathVariable("idR") Integer idRole){
 
         if(userService.updateRoleUser(idUser, idRole)){
             return ResponseEntity.ok().body(true);
