@@ -33,6 +33,9 @@ public class UserServiceImpl implements UserService {
     private UtilisateurRepo userRepo;
 
     @Autowired
+    private RoleRepo roleRepo;
+
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
@@ -40,9 +43,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private RoleRepo roleRepo;
 
     @Override
     public Utilisateur getUserById(Long idUser) {
@@ -60,14 +60,6 @@ public class UserServiceImpl implements UserService {
         u.setPassword(passwordEncoder.encode(u.getPassword()));
 
         if(userRepo.save(u)!=null){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Boolean saveRole(Role r) {
-        if(roleRepo.save(r)!=null){
             return true;
         }
         return false;
@@ -108,10 +100,9 @@ public class UserServiceImpl implements UserService {
     public Boolean updateRoleUser(Long idUser, Integer idRole) {
 
         Utilisateur user = userRepo.findById(idUser).get();
-        Role role = roleRepo.findById(idRole).get();
 
         if(user != null){
-            user.setRole(role.getNom());
+            user.setIdRole(idRole);
             userRepo.save(user);
             return true;
         }
@@ -129,7 +120,8 @@ public class UserServiceImpl implements UserService {
         LoginResponse token = new LoginResponse();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequest.getEmail(), loginRequest.getPassword()));
-        UserDetails user = userRepo.findByMail(loginRequest.getEmail()).orElseThrow( () -> new UsernameNotFoundException("User not found"));
+        Utilisateur user = userRepo.findByMail(loginRequest.getEmail()).orElseThrow( () -> new UsernameNotFoundException("User not found"));
+        user.setRole(roleRepo.findStrRoleById(user.getIdRole()));
         if(user != null){
             token.setToken(jwtUtils.generateToken(user));
             token.setUser(user);

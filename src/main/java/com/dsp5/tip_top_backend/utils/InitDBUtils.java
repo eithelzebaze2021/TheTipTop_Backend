@@ -35,21 +35,21 @@ public class InitDBUtils implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //Init Role
-        Role role1 = new Role("ROLE_CLIENT");
-        Role role2 = new Role("ROLE_EMPLOYE");
-        Role role3 = new Role("ROLE_ADMIN");
+        Role role1 = new Role(1,"ROLE_CLIENT");
+        Role role2 = new Role(2,"ROLE_EMPLOYE");
+        Role role3 = new Role(3,"ROLE_ADMIN");
         this.roleRepo.saveAll(Arrays.asList(role1,role2,role3));
 
         //Init user
-        Utilisateur user1 = new Utilisateur(role1.getNom(),"Zebaze","Eithel","France",
+        Utilisateur user1 = new Utilisateur(1,"Zebaze","Eithel","France",
                 "95","eithel.zebaze@gmail.com", passwordEncoder.encode("1234"));
-        Utilisateur user2 = new Utilisateur(role1.getNom(),"Fopa","Armelle","France",
+        Utilisateur user2 = new Utilisateur(1,"Fopa","Armelle","France",
                 "93","armelle.fopa@gmail.com",passwordEncoder.encode("1234"));
-        Utilisateur user3 = new Utilisateur(role1.getNom(),"Donna","Stephane","France",
+        Utilisateur user3 = new Utilisateur(1,"Donna","Stephane","France",
                 "75","stephane.donna@gmail.com",passwordEncoder.encode("1234"));
-        Utilisateur user4 = new Utilisateur(role2.getNom(),"employe","employe","Nice",
+        Utilisateur user4 = new Utilisateur(2,"employe","employe","Nice",
                 "75","employe@gmail.com",passwordEncoder.encode("1234"));
-        Utilisateur user5 = new Utilisateur(role3.getNom(),"admin","admin","France",
+        Utilisateur user5 = new Utilisateur(3,"admin","admin","France",
                 "75","admin@gmail.com",passwordEncoder.encode("1234"));
         this.userRepo.save(user5);
 

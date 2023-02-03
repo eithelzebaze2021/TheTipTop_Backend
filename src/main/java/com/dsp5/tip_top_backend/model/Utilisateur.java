@@ -34,10 +34,10 @@ public class Utilisateur implements UserDetails {
     )
     private Long idUser;
     @Column(
-            name = "role",
+            name = "id_role",
             nullable = false
     )
-    private String role;
+    private Integer idRole;
     @Column(
             name = "nom",
             nullable = false,
@@ -77,12 +77,16 @@ public class Utilisateur implements UserDetails {
     )
     private String password;
 
+    @Transient
+    private String role;
+
     public Utilisateur() {
     }
 
-    public Utilisateur(Long idUser, String role, String nom, String prenom, String adresse, String code_postal, String mail, String password) {
+    public Utilisateur(Long idUser, Integer idRole, String nom, String prenom,
+                       String adresse, String code_postal, String mail, String password) {
         this.idUser = idUser;
-        this.role = role;
+        this.idRole = idRole;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -91,10 +95,10 @@ public class Utilisateur implements UserDetails {
         this.password = password;
     }
 
-    public Utilisateur(String role, String nom,
+    public Utilisateur(Integer idRole, String nom,
                        String prenom, String adresse, String code_postal,
                        String mail, String password) {
-        this.role = role;
+        this.idRole = idRole;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -111,12 +115,12 @@ public class Utilisateur implements UserDetails {
         this.idUser = idUser;
     }
 
-    public String getRole() {
-        return role;
+    public Integer getIdRole() {
+        return idRole;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setIdRole(Integer idRole) {
+        this.idRole = idRole;
     }
 
     public String getNom() {
@@ -170,7 +174,7 @@ public class Utilisateur implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        return List.of(new SimpleGrantedAuthority(role));
+        return List.of(new SimpleGrantedAuthority(Integer.toString(idRole)));
     }
 
     @Override
@@ -198,5 +202,11 @@ public class Utilisateur implements UserDetails {
         return true;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

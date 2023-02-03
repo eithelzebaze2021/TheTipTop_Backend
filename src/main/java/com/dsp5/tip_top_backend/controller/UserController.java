@@ -46,19 +46,7 @@ public class UserController {
     public ResponseEntity<Boolean>saveUser(@RequestBody Utilisateur u){
 
         if(userService.saveUser(u)){
-            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/saveUser").toUriString());
-            return ResponseEntity.created(uri).body(true);
-        }else{
-            return ResponseEntity.badRequest().body(false);
-        }
-
-    }
-
-    @PostMapping("/saveRole")
-    public ResponseEntity<Boolean>saveRole(@RequestBody Role r){
-
-        if(userService.saveRole(r)){
-            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/saveRole").toUriString());
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/saveUser/*").toUriString());
             return ResponseEntity.created(uri).body(true);
         }else{
             return ResponseEntity.badRequest().body(false);
@@ -77,7 +65,6 @@ public class UserController {
         }
 
     }
-
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
