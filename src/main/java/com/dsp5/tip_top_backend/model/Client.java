@@ -27,14 +27,6 @@ public class Client {
     )
     private Long idClient;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(name = "id_client")
-    private List<Ticket> ticketList = new ArrayList<>();
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id")
     private Utilisateur user_client;
@@ -43,9 +35,8 @@ public class Client {
     public Client() {
     }
 
-    public Client(Long idClient, List<Ticket> ticketList, Utilisateur user_client) {
+    public Client(Long idClient, Utilisateur user_client) {
         this.idClient = idClient;
-        this.ticketList = ticketList;
         this.user_client = user_client;
     }
 
@@ -59,14 +50,6 @@ public class Client {
 
     public void setIdClient(Long idClient) {
         this.idClient = idClient;
-    }
-
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
     }
 
     public Utilisateur getUser_client() {

@@ -9,7 +9,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Gain")
 @Table(
-        name = "gain"
+        name = "gain",
+        uniqueConstraints = {
+        @UniqueConstraint(name = "gain_unique", columnNames = "nom_gain")
+}
 )
 public class Gain {
     @Id
@@ -38,22 +41,13 @@ public class Gain {
     )
     private Long nbreTicketRestant;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(name = "id_gain")
-    private List<Ticket> ticketList = new ArrayList<>();
-
     public Gain() {
     }
 
-    public Gain(Long idGain, Long nomGain, Long nbreTicketRestant, List<Ticket> ticketList) {
+    public Gain(Long idGain, Long nomGain, Long nbreTicketRestant) {
         this.idGain = idGain;
         this.nomGain = nomGain;
         this.nbreTicketRestant = nbreTicketRestant;
-        this.ticketList = ticketList;
     }
 
 
@@ -79,13 +73,5 @@ public class Gain {
 
     public void setNbreTicketRestant(Long nbreTicketRestant) {
         this.nbreTicketRestant = nbreTicketRestant;
-    }
-
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
     }
 }

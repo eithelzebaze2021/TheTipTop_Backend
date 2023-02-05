@@ -2,13 +2,20 @@ package com.dsp5.tip_top_backend.repository;
 
 import com.dsp5.tip_top_backend.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface TicketRepo extends JpaRepository<Ticket, Long> {
-    List<Ticket> findByIdClient(Long idClient);
+    @Query(name = "Ticket.findByIdClient", value = "select * from Ticket t where t.id_client=:idClient LIMIT :first OFFSET :last", nativeQuery = true)
+    List<Ticket> findByIdClient(@Param("idClient")Long idClient, @Param("first")Integer first, @Param("last")Integer last);
 
-    List<Ticket> findByIdGain(Long idGain);
+    @Query(name = "Ticket.findByIdGain", value = "select * from Ticket t where t.id_gain=:idGain", nativeQuery = true)
+    List<Ticket> findByIdGain(@Param("idGain")Long idGain);
+
+    @Query(name = "Ticket.findByNumTicket", value = "select * from Ticket t where t.numero=:numTicket", nativeQuery = true)
+    Ticket findByNumTicket(@Param("numTicket")String numTicket);
 }

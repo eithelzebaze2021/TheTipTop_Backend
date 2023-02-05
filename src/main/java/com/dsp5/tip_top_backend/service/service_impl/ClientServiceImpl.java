@@ -33,9 +33,15 @@ public class ClientServiceImpl implements ClientService {
     private GainRepo gainRepo;
 
     @Override
-    public Client getClientById(Long idClient) {
+    public Client getClientByIdClient(Long idClient) {
         log.debug("Trouver le client dont l'idClient est : {} ", idClient);
         return clientRepo.findById(idClient).get();
+    }
+
+    @Override
+    public Client getClientByIdUser(Long idUser) {
+        log.debug("Trouver le client dont l'idClient est : {} ", idUser);
+        return clientRepo.findByIdUser(idUser).get();
     }
 
     @Override
@@ -51,21 +57,5 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<Client> getAllClient() {
         return clientRepo.findAll();
-    }
-
-    @Override
-    public List<Gain> getAllGain(Long idClient, Integer first, Integer last) {
-
-        Pageable limit = PageRequest.of(first,last);
-
-        List<Ticket> allTicketClient = ticketRepo.findAll(limit).getContent();
-
-        List<Gain> allGainClient = new ArrayList<Gain>();
-
-        for (Ticket ticket : allTicketClient) {
-            allGainClient.add(gainRepo.findById(ticket.getIdGain()).get());
-        }
-
-        return allGainClient;
     }
 }

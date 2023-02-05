@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface ClientService {
 
-    Client getClientById(Long idClient);
+    Client getClientByIdClient(Long idClient);
+    Client getClientByIdUser(Long idUser);
     Boolean saveClient(Client c);
     List<Client> getAllClient();
-    List<Gain> getAllGain(Long idClient, Integer first, Integer last);
 
 }

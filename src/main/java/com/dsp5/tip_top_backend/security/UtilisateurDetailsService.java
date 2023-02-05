@@ -1,6 +1,5 @@
 package com.dsp5.tip_top_backend.security;
 
-import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.repository.UtilisateurRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +16,6 @@ public class UtilisateurDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        return userRepo.findByMail(username).get();
+        return userRepo.findByMail(username).orElseThrow( () -> new UsernameNotFoundException("User not found"));
     }
 }

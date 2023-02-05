@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -39,7 +40,7 @@ public class JwtUtils {
                 .parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 
@@ -50,7 +51,9 @@ public class JwtUtils {
     public String generateToken(Map<String, Objects> extractClaims, UserDetails userDetails){
         return Jwts
                 .builder()
+                .setClaims(extractClaims)
                 .setSubject(userDetails.getUsername())
+                .claim("authorities",userDetails.getAuthorities())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
@@ -68,4 +71,17 @@ public class JwtUtils {
     private Date extractDateExpiration(String jwtToken) {
         return extractClaim(jwtToken, Claims::getExpiration);
     }
+
+    public UserDetails  getUserFromToken() {
+        UserDetails username;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal);
+        } else {
+            username = null;
+        }
+        return username;
+    }
+
 }
