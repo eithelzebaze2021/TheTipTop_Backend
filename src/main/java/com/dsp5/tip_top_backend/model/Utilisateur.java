@@ -77,6 +77,13 @@ public class Utilisateur implements UserDetails {
     )
     private String password;
 
+    @Column(
+            name = "ville",
+            nullable = false,
+            columnDefinition = "TEXT"
+    )
+    private String ville;
+
     @Transient
     private String role;
 
@@ -84,7 +91,8 @@ public class Utilisateur implements UserDetails {
     }
 
     public Utilisateur(Long idUser, Integer idRole, String nom, String prenom,
-                       String adresse, String code_postal, String mail, String password) {
+                       String adresse, String code_postal, String mail,
+                       String password, String ville) {
         this.idUser = idUser;
         this.idRole = idRole;
         this.nom = nom;
@@ -93,11 +101,12 @@ public class Utilisateur implements UserDetails {
         this.code_postal = code_postal;
         this.mail = mail;
         this.password = password;
+        this.ville = ville;
     }
 
     public Utilisateur(Integer idRole, String nom,
                        String prenom, String adresse, String code_postal,
-                       String mail, String password) {
+                       String mail, String password, String ville) {
         this.idRole = idRole;
         this.nom = nom;
         this.prenom = prenom;
@@ -105,6 +114,7 @@ public class Utilisateur implements UserDetails {
         this.code_postal = code_postal;
         this.mail = mail;
         this.password = password;
+        this.ville = ville;
     }
 
     public Long getIdUser() {
@@ -200,6 +210,14 @@ public class Utilisateur implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 
     public String getRole() {

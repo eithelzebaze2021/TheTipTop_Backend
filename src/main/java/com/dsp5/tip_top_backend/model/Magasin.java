@@ -48,24 +48,15 @@ public class Magasin {
     )
     private String code_postal;
 
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(name = "id_magasin")
-    private List<Ticket> ticketList = new ArrayList<>();
-
 
     public Magasin() {
     }
 
-    public Magasin(Long idMagasin, String nomMagasin, String adresse, String code_postal, List<Ticket> ticketList) {
+    public Magasin(Long idMagasin, String nomMagasin, String adresse, String code_postal) {
         this.idMagasin = idMagasin;
         this.nomMagasin = nomMagasin;
         this.adresse = adresse;
         this.code_postal = code_postal;
-        this.ticketList = ticketList;
     }
 
     public Magasin(String nomMagasin, String adresse, String code_postal) {
@@ -105,13 +96,5 @@ public class Magasin {
 
     public void setCode_postal(String code_postal) {
         this.code_postal = code_postal;
-    }
-
-    public List<Ticket> getTicketList() {
-        return ticketList;
-    }
-
-    public void setTicketList(List<Ticket> ticketList) {
-        this.ticketList = ticketList;
     }
 }

@@ -2,7 +2,6 @@ package com.dsp5.tip_top_backend.controller;
 
 import com.dsp5.tip_top_backend.utils.JwtUtils;
 import com.dsp5.tip_top_backend.utils.LoginRequest;
-import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.service.UserService;
 import com.dsp5.tip_top_backend.utils.LoginResponse;
@@ -46,7 +45,7 @@ public class UserController {
     public ResponseEntity<Boolean>saveUser(@RequestBody Utilisateur u){
 
         if(userService.saveUser(u)){
-            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/saveUser/*").toUriString());
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/saveUser").toUriString());
             return ResponseEntity.created(uri).body(true);
         }else{
             return ResponseEntity.badRequest().body(false);
@@ -69,6 +68,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest){
         return new ResponseEntity<>(userService.login(loginRequest),HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/getAllRoleForPublic")
+    public ResponseEntity<List<String>> getAllRoleForPublic(){
+        return new ResponseEntity<>(userService.getAllRoleForPublic(),HttpStatus.ACCEPTED);
     }
 
 

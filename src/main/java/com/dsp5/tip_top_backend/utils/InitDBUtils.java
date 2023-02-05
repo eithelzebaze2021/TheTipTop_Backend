@@ -1,4 +1,4 @@
-package com.dsp5.tip_top_backend.utils;
+/*package com.dsp5.tip_top_backend.utils;
 
 import com.dsp5.tip_top_backend.model.*;
 import com.dsp5.tip_top_backend.repository.*;
@@ -42,15 +42,15 @@ public class InitDBUtils implements CommandLineRunner {
 
         //Init user
         Utilisateur user1 = new Utilisateur(1,"Zebaze","Eithel","France",
-                "95","eithel.zebaze@gmail.com", passwordEncoder.encode("1234"));
+                "95","eithel.zebaze@gmail.com", passwordEncoder.encode("1234"),"Vincenne");
         Utilisateur user2 = new Utilisateur(1,"Fopa","Armelle","France",
-                "93","armelle.fopa@gmail.com",passwordEncoder.encode("1234"));
+                "93","armelle.fopa@gmail.com",passwordEncoder.encode("1234"),"Vincenne");
         Utilisateur user3 = new Utilisateur(1,"Donna","Stephane","France",
-                "75","stephane.donna@gmail.com",passwordEncoder.encode("1234"));
+                "75","stephane.donna@gmail.com",passwordEncoder.encode("1234"),"Vincenne");
         Utilisateur user4 = new Utilisateur(2,"employe","employe","Nice",
-                "75","employe@gmail.com",passwordEncoder.encode("1234"));
+                "75","employe@gmail.com",passwordEncoder.encode("1234"),"Vincenne");
         Utilisateur user5 = new Utilisateur(3,"admin","admin","France",
-                "75","admin@gmail.com",passwordEncoder.encode("1234"));
+                "75","admin@gmail.com",passwordEncoder.encode("1234"),"Vincenne");
         this.userRepo.save(user5);
 
         //Init Client
@@ -67,4 +67,4 @@ public class InitDBUtils implements CommandLineRunner {
         this.employeRepo.save(employe1);
 
     }
-}
+}*/

@@ -23,9 +23,14 @@ public class ClientController {
         return new ResponseEntity<>(clientService.getAllClient(), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/getClientById/{idC}")
-    public ResponseEntity<Client>getClientById(@PathVariable("idC") Long idClient){
-        return new ResponseEntity<>(clientService.getClientById(idClient), HttpStatus.ACCEPTED);
+    @GetMapping("/getClientByIdClient/{idC}")
+    public ResponseEntity<Client>getClientByIdClient(@PathVariable("idC") Long idClient){
+        return new ResponseEntity<>(clientService.getClientByIdClient(idClient), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/getClientByIdUser/{idU}")
+    public ResponseEntity<Client>getClientByIdUser(@PathVariable("idU") Long idUser){
+        return new ResponseEntity<>(clientService.getClientByIdUser(idUser), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/saveClient")

@@ -1,7 +1,8 @@
 package com.dsp5.tip_top_backend.service.service_impl;
 
+import com.dsp5.tip_top_backend.model.Client;
+import com.dsp5.tip_top_backend.service.ClientService;
 import com.dsp5.tip_top_backend.utils.LoginRequest;
-import com.dsp5.tip_top_backend.model.Role;
 import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.repository.RoleRepo;
 import com.dsp5.tip_top_backend.repository.UtilisateurRepo;
@@ -15,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UtilisateurRepo userRepo;
+
+    @Autowired
+    private ClientService clientService;
 
     @Autowired
     private RoleRepo roleRepo;
@@ -57,10 +60,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean saveUser(Utilisateur u) {
 
-        u.setPassword(passwordEncoder.encode(u.getPassword()));
+       Integer idRole = roleRepo.findIdRoleByStr(u.getRole());
 
-        if(userRepo.save(u)!=null){
+       u.setPassword(passwordEncoder.encode(u.getPassword()));
+       u.setIdRole(idRole);
+
+       Utilisateur userSave = userRepo.save(u);
+
+        if(userSave!=null){
+
+            if(u.getRole().equals("ROLE_CLIENT")){
+                Client clientSave = new Client(userSave);
+                return clientService.saveClient(clientSave);
+            }
+
             return true;
+
         }
         return false;
     }
@@ -121,13 +136,18 @@ public class UserServiceImpl implements UserService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequest.getEmail(), loginRequest.getPassword()));
         Utilisateur user = userRepo.findByMail(loginRequest.getEmail()).orElseThrow( () -> new UsernameNotFoundException("User not found"));
-        user.setRole(roleRepo.findStrRoleById(user.getIdRole()));
         if(user != null){
+            user.setRole(roleRepo.findStrRoleById(user.getIdRole()));
             token.setToken(jwtUtils.generateToken(user));
             token.setUser(user);
             return token;
         }
        return token;
+    }
+
+    @Override
+    public List<String> getAllRoleForPublic() {
+        return roleRepo.findAllStrRole();
     }
 
     @Bean

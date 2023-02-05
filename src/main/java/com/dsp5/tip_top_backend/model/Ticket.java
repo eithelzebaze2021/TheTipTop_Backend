@@ -6,7 +6,10 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Ticket")
 @Table(
-        name = "ticket"
+        name = "ticket",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "num_ticket_unique", columnNames = "numero")
+        }
 )
 public class Ticket {
 
@@ -26,21 +29,21 @@ public class Ticket {
 
     @Column(
             name = "id_client",
-            nullable = false
+            nullable = true
     )
     private Long idClient;
+
+    @Column(
+            name = "id_gain",
+            nullable = true
+    )
+    private Long idGain;
 
     @Column(
             name = "id_magasin",
             nullable = false
     )
     private Long idMagasin;
-
-    @Column(
-            name = "id_gain",
-            nullable = false
-    )
-    private Long idGain;
 
     @Column(
             name = "montant",
@@ -50,9 +53,10 @@ public class Ticket {
 
     @Column(
             name = "numero",
-            nullable = true
+            nullable = false,
+            columnDefinition = "TEXT"
     )
-    private Long numero;
+    private String numero;
 
     @Column(
             name = "gain_recu",
@@ -60,28 +64,100 @@ public class Ticket {
     )
     private Boolean gainRecu;
 
+    @ManyToOne
+    // déclaration d'une table d'association
+    @JoinTable(name = "gain_ticket",
+            joinColumns = @JoinColumn(name = "id_ticket"),
+            inverseJoinColumns = @JoinColumn(name = "id_gain"))
+    private Gain gain;
+
+    @ManyToOne
+    // déclaration d'une table d'association
+    @JoinTable(name = "client_ticket",
+            joinColumns = @JoinColumn(name = "id_ticket"),
+            inverseJoinColumns = @JoinColumn(name = "id_client"))
+    private Client client;
+
+    @ManyToOne
+    // déclaration d'une table d'association
+    @JoinTable(name = "magasin_ticket",
+            joinColumns = @JoinColumn(name = "id_ticket"),
+            inverseJoinColumns = @JoinColumn(name = "id_magasin"))
+    private Magasin magasin;
+
 
     public Ticket() {
     }
 
-    public Ticket(Long idTicket, Long idClient, Long idMagasin, Long idGain, Long montant, Long numero, Boolean gainRecu) {
+    public Ticket(Long idTicket, Long idClient, Long idMagasin, Long montant, String numero, Boolean gainRecu) {
         this.idTicket = idTicket;
         this.idClient = idClient;
         this.idMagasin = idMagasin;
-        this.idGain = idGain;
         this.montant = montant;
         this.numero = numero;
         this.gainRecu = gainRecu;
     }
 
-    public Ticket(Long idClient, Long idMagasin, Long idGain,
-                  Long montant, Long numero, Boolean gainRecu) {
+    public Ticket(Long idClient, Long idMagasin, Long montant, String numero, Boolean gainRecu, Gain gain) {
         this.idClient = idClient;
         this.idMagasin = idMagasin;
-        this.idGain = idGain;
         this.montant = montant;
         this.numero = numero;
         this.gainRecu = gainRecu;
+        this.gain = gain;
+    }
+
+    public Ticket(Long montant,
+                  String numero, Boolean gainRecu, Gain gain,
+                  Client client, Magasin magasin) {
+        this.montant = montant;
+        this.numero = numero;
+        this.gainRecu = gainRecu;
+        this.gain = gain;
+        this.client = client;
+        this.magasin = magasin;
+    }
+
+    public Ticket(Long montant,
+                  String numero, Boolean gainRecu,
+                  Gain gain,Magasin magasin) {
+        this.montant = montant;
+        this.numero = numero;
+        this.gainRecu = gainRecu;
+        this.gain = gain;
+        this.magasin = magasin;
+    }
+
+    public Long getIdGain() {
+        return idGain;
+    }
+
+    public void setIdGain(Long idGain) {
+        this.idGain = idGain;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Magasin getMagasin() {
+        return magasin;
+    }
+
+    public void setMagasin(Magasin magasin) {
+        this.magasin = magasin;
+    }
+
+    public Gain getGain() {
+        return gain;
+    }
+
+    public void setGain(Gain gain) {
+        this.gain = gain;
     }
 
     public Long getIdTicket() {
@@ -108,14 +184,6 @@ public class Ticket {
         this.idMagasin = idMagasin;
     }
 
-    public Long getIdGain() {
-        return idGain;
-    }
-
-    public void setIdGain(Long idGain) {
-        this.idGain = idGain;
-    }
-
     public Long getMontant() {
         return montant;
     }
@@ -124,11 +192,11 @@ public class Ticket {
         this.montant = montant;
     }
 
-    public Long getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

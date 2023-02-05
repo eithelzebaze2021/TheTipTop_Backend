@@ -1,5 +1,6 @@
 package com.dsp5.tip_top_backend.service.service_impl;
 
+import com.dsp5.tip_top_backend.model.Client;
 import com.dsp5.tip_top_backend.model.Gain;
 import com.dsp5.tip_top_backend.model.Ticket;
 import com.dsp5.tip_top_backend.repository.GainRepo;
@@ -9,9 +10,12 @@ import com.dsp5.tip_top_backend.service.TicketService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -34,15 +38,33 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket saveTicket(Ticket t, List<Gain> listgainDispo) {
+    public Boolean saveTicketClient(String numTicket, Client C) {
+
+        List<Gain> listgainDispo = gainRepo.findGainDispo();
 
         Gain gainClient = attribuerGain(listgainDispo);
 
         gainClient.setNbreTicketRestant(gainClient.getNbreTicketRestant()-1);
 
-        t.setIdGain(gainService.saveGain(gainClient).getIdGain());
+        Ticket t = ticketRepo.findByNumTicket(numTicket);
 
-        return ticketRepo.save(t);
+        if(t!=null){
+            t.setGain(gainService.saveGain(gainClient));
+            t.setClient(C);
+            ticketRepo.save(t);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean saveTicketMagasin(Ticket t) {
+        if (ticketRepo.save(t) != null) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
@@ -51,8 +73,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getAllTicketOfClient(Long idClient) {
-        return ticketRepo.findByIdClient(idClient);
+    public List<Ticket> getAllTicketOfClient(Long idClient,Integer first,Integer last) {
+
+        return ticketRepo.findByIdClient(idClient,first,last);
     }
 
     @Override
