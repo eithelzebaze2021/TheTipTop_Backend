@@ -52,4 +52,9 @@ public class EmployeServiceImpl implements EmployeService {
     public List<Employe> getAllEmploye() {
         return employeRepo.findAll();
     }
+
+    @Override
+    public Employe getEmployeByIdUser(Long idU) {
+        return employeRepo.findByIdUser(idU).get();
+    }
 }

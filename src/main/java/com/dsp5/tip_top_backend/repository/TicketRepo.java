@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface TicketRepo extends JpaRepository<Ticket, Long> {
 
     @Query(name = "Ticket.findByNumTicket", value = "select * from Ticket t where t.numero=:numTicket", nativeQuery = true)
     Ticket findByNumTicket(@Param("numTicket")String numTicket);
+
+    @Query(name = "Ticket.findByIdMagasin", value = "select * from Ticket t where t.id_magasin=:idM", nativeQuery = true)
+    List<Ticket> findByIdMagasin(@Param("idM")Long idM);
 }

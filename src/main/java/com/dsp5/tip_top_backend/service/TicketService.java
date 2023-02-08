@@ -15,5 +15,5 @@ public interface TicketService {
     List<Ticket> getAllTicketOfClient(Long idClient, Integer first,Integer last);
     List<Ticket> getAllTicketOfGain(Long idGain);
     Gain attribuerGain(List<Gain> listGain);
-
+    List<Ticket> getTicketByIdMagasin(Long idM);
 }

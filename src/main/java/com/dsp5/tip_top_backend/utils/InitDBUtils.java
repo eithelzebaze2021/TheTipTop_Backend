@@ -1,4 +1,4 @@
-/*package com.dsp5.tip_top_backend.utils;
+package com.dsp5.tip_top_backend.utils;
 
 import com.dsp5.tip_top_backend.model.*;
 import com.dsp5.tip_top_backend.repository.*;
@@ -67,4 +67,4 @@ public class InitDBUtils implements CommandLineRunner {
         this.employeRepo.save(employe1);
 
     }
-}*/
+}

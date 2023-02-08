@@ -11,5 +11,5 @@ public interface EmployeService {
     Employe saveEmploye(Employe E);
     Boolean UpdateEmployeMagasin(Long idEmploye, Long idMagasin);
     List<Employe> getAllEmploye();
-
+    Employe getEmployeByIdUser(Long idU);
 }

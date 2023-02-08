@@ -90,4 +90,9 @@ public class TicketServiceImpl implements TicketService {
         int n = r.nextInt(listGain.size());
         return listGain.get(n);
     }
+
+    @Override
+    public List<Ticket> getTicketByIdMagasin(Long idM) {
+        return ticketRepo.findByIdMagasin(idM);
+    }
 }

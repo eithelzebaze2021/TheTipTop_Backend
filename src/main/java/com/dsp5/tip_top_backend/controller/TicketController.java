@@ -35,4 +35,9 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.saveTicketClient(numTicket,c), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/getTicketByIdMagasin/{idM}")
+    public ResponseEntity<List<Ticket>>getTicketByIdMagasin(@PathVariable("idM") Long idM){
+        return new ResponseEntity<>(ticketService.getTicketByIdMagasin(idM),HttpStatus.ACCEPTED);
+    }
+
 }
