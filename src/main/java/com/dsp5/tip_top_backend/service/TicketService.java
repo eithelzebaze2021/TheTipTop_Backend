@@ -13,7 +13,7 @@ public interface TicketService {
     Boolean saveTicketMagasin(Ticket t);
     List<Ticket> getAllTicket();
     List<Ticket> getAllTicketOfClient(Long idClient, Integer first,Integer last);
-    List<Ticket> getAllTicketOfGain(Long idGain);
+    List<Ticket> getAllTicketOfGain(Integer first,Integer last);
     Gain attribuerGain(List<Gain> listGain);
     List<Ticket> getTicketByIdMagasin(Long idM);
 }

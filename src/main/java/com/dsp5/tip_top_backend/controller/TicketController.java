@@ -25,6 +25,12 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.getAllTicketOfClient(idClient,first,last), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/getAllTicketGain/{first}/{last}")
+    public ResponseEntity<List<Ticket>> getAllTicketGain(@PathVariable("first") Integer first,
+                                                           @PathVariable("last") Integer last){
+        return new ResponseEntity<>(ticketService.getAllTicketOfGain(first,last), HttpStatus.ACCEPTED);
+    }
+
     @PostMapping("/saveTicketMagasin")
     public ResponseEntity<Boolean> saveTicketMagasin(@RequestBody Ticket t){
         return new ResponseEntity<>(ticketService.saveTicketMagasin(t), HttpStatus.ACCEPTED);

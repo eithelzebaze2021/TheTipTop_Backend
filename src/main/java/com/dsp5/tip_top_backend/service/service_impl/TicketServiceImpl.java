@@ -79,8 +79,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getAllTicketOfGain(Long idGain) {
-        return ticketRepo.findByIdGain(idGain);
+    public List<Ticket> getAllTicketOfGain(Integer first,Integer last) {
+        return ticketRepo.findByIdGainNotNull();
     }
 
     @Override

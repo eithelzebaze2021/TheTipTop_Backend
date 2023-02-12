@@ -44,7 +44,7 @@ public class GainServiceImpl implements GainService {
 
     @Override
     public List<Gain> getAllGain() {
-        return gainRepo.findAll();
+        return gainRepo.findAllOrder();
     }
 
     @Override

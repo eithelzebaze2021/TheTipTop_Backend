@@ -48,21 +48,30 @@ public class Magasin {
     )
     private String code_postal;
 
+    @Column(
+            name = "ville",
+            nullable = true,
+            columnDefinition = "TEXT"
+    )
+    private String ville;
+
 
     public Magasin() {
     }
 
-    public Magasin(Long idMagasin, String nomMagasin, String adresse, String code_postal) {
+    public Magasin(Long idMagasin, String nomMagasin, String adresse, String code_postal, String ville) {
         this.idMagasin = idMagasin;
         this.nomMagasin = nomMagasin;
         this.adresse = adresse;
         this.code_postal = code_postal;
+        this.ville = ville;
     }
 
-    public Magasin(String nomMagasin, String adresse, String code_postal) {
+    public Magasin(String nomMagasin, String adresse, String code_postal, String ville) {
         this.nomMagasin = nomMagasin;
         this.adresse = adresse;
         this.code_postal = code_postal;
+        this.ville = ville;
     }
 
 
@@ -96,5 +105,13 @@ public class Magasin {
 
     public void setCode_postal(String code_postal) {
         this.code_postal = code_postal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
     }
 }

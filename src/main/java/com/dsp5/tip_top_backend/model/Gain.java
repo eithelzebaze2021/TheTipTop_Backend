@@ -2,17 +2,11 @@ package com.dsp5.tip_top_backend.model;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Gain")
 @Table(
-        name = "gain",
-        uniqueConstraints = {
-        @UniqueConstraint(name = "gain_unique", columnNames = "nom_gain")
-}
+        name = "gain"
 )
 public class Gain {
     @Id
@@ -33,7 +27,7 @@ public class Gain {
             nullable = false,
             columnDefinition = "TEXT"
     )
-    private Long nomGain;
+    private String nomGain;
 
     @Column(
             name = "nbre_ticket_restant",
@@ -41,15 +35,52 @@ public class Gain {
     )
     private Long nbreTicketRestant;
 
+    @Column(
+            name = "lien_image_gain",
+            nullable = true,
+            columnDefinition = "TEXT"
+    )
+    private String lienImageGain;
+
+    @Column(
+            name = "description",
+            nullable = true,
+            columnDefinition = "TEXT"
+    )
+    private String description;
+
+    @Column(
+            name = "prix_gain",
+            nullable = true
+    )
+    private Long prixGain;
+
     public Gain() {
     }
 
-    public Gain(Long idGain, Long nomGain, Long nbreTicketRestant) {
-        this.idGain = idGain;
+    public Gain(String nomGain, String lienImageGain, Long nbreTicketRestant, String description, Long prixGain) {
         this.nomGain = nomGain;
         this.nbreTicketRestant = nbreTicketRestant;
+        this.lienImageGain = lienImageGain;
+        this.description = description;
+        this.prixGain = prixGain;
     }
 
+    public String getLienImageGain() {
+        return lienImageGain;
+    }
+
+    public void setLienImageGain(String lienImageGain) {
+        this.lienImageGain = lienImageGain;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Long getIdGain() {
         return idGain;
@@ -59,11 +90,11 @@ public class Gain {
         this.idGain = idGain;
     }
 
-    public Long getNomGain() {
+    public String getNomGain() {
         return nomGain;
     }
 
-    public void setNomGain(Long nomGain) {
+    public void setNomGain(String nomGain) {
         this.nomGain = nomGain;
     }
 
@@ -73,5 +104,13 @@ public class Gain {
 
     public void setNbreTicketRestant(Long nbreTicketRestant) {
         this.nbreTicketRestant = nbreTicketRestant;
+    }
+
+    public Long getPrixGain() {
+        return prixGain;
+    }
+
+    public void setPrixGain(Long prixGain) {
+        this.prixGain = prixGain;
     }
 }

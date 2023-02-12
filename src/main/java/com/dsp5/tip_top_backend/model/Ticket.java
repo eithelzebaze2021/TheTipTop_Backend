@@ -89,27 +89,14 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Long idTicket, Long idClient, Long idMagasin, Long montant, String numero, Boolean gainRecu) {
+    public Ticket(Long idTicket, Long idClient, Long idGain,
+                  Long idMagasin, Long montant, String numero,
+                  Boolean gainRecu, Gain gain, Client client,
+                  Magasin magasin) {
         this.idTicket = idTicket;
         this.idClient = idClient;
+        this.idGain = idGain;
         this.idMagasin = idMagasin;
-        this.montant = montant;
-        this.numero = numero;
-        this.gainRecu = gainRecu;
-    }
-
-    public Ticket(Long idClient, Long idMagasin, Long montant, String numero, Boolean gainRecu, Gain gain) {
-        this.idClient = idClient;
-        this.idMagasin = idMagasin;
-        this.montant = montant;
-        this.numero = numero;
-        this.gainRecu = gainRecu;
-        this.gain = gain;
-    }
-
-    public Ticket(Long montant,
-                  String numero, Boolean gainRecu, Gain gain,
-                  Client client, Magasin magasin) {
         this.montant = montant;
         this.numero = numero;
         this.gainRecu = gainRecu;
@@ -118,13 +105,27 @@ public class Ticket {
         this.magasin = magasin;
     }
 
-    public Ticket(Long montant,
-                  String numero, Boolean gainRecu,
-                  Gain gain,Magasin magasin) {
+    public Ticket(Long idMagasin,
+                  Long montant, String numero, Boolean gainRecu,
+                  Magasin magasin) {
+        this.idMagasin = idMagasin;
+        this.montant = montant;
+        this.numero = numero;
+        this.gainRecu = gainRecu;
+        this.magasin = magasin;
+    }
+
+    public Ticket(Long idClient, Long idGain, Long idMagasin,
+                  Long montant, String numero, Boolean gainRecu,
+                  Gain gain, Client client, Magasin magasin) {
+        this.idClient = idClient;
+        this.idGain = idGain;
+        this.idMagasin = idMagasin;
         this.montant = montant;
         this.numero = numero;
         this.gainRecu = gainRecu;
         this.gain = gain;
+        this.client = client;
         this.magasin = magasin;
     }
 
