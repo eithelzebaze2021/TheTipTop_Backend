@@ -23,10 +23,6 @@ steps:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
-- task: Docker@2
-  inputs:
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
