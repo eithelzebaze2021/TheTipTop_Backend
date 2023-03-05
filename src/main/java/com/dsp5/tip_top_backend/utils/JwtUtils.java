@@ -1,5 +1,6 @@
 package com.dsp5.tip_top_backend.utils;
 
+import com.dsp5.tip_top_backend.model.Utilisateur;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -72,12 +73,12 @@ public class JwtUtils {
         return extractClaim(jwtToken, Claims::getExpiration);
     }
 
-    public UserDetails  getUserFromToken() {
-        UserDetails username;
+    public Utilisateur getUserFromToken() {
+        Utilisateur username;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal);
+            username = ((Utilisateur)principal);
         } else {
             username = null;
         }

@@ -1,7 +1,10 @@
 package com.dsp5.tip_top_backend.controller;
 
 import com.dsp5.tip_top_backend.model.Client;
+import com.dsp5.tip_top_backend.model.Utilisateur;
+import com.dsp5.tip_top_backend.repository.RoleRepo;
 import com.dsp5.tip_top_backend.service.ClientService;
+import com.dsp5.tip_top_backend.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +21,30 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
+    @Autowired
+    private RoleRepo roleRepo;
+
+    @Autowired
+    private JwtUtils jwtUtils;
+
     @GetMapping("/getAllClient")
     public ResponseEntity<List<Client>> getAllClient(){
-        return new ResponseEntity<>(clientService.getAllClient(), HttpStatus.ACCEPTED);
+
+        Utilisateur user = jwtUtils.getUserFromToken();
+
+        if(roleRepo.findStrRoleById(user.getIdRole()).equals("ROLE_ADMIN")){
+            return new ResponseEntity<>(clientService.getAllClient(), HttpStatus.ACCEPTED);
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
+    }
+
+    @GetMapping("/getClientConnect")
+    public ResponseEntity<Client>getClientConnect(){
+
+        Utilisateur user = jwtUtils.getUserFromToken();
+
+        return new ResponseEntity<>(clientService.getClientByIdUser(user.getIdUser()), HttpStatus.OK);
     }
 
     @GetMapping("/getClientByIdClient/{idC}")
