@@ -75,5 +75,4 @@ public class UserController {
         return new ResponseEntity<>(userService.getAllRoleForPublic(),HttpStatus.ACCEPTED);
     }
 
-
 }

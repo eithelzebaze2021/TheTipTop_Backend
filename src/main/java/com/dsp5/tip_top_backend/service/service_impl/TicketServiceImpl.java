@@ -79,8 +79,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getAllTicketOfGain(Long idGain) {
-        return ticketRepo.findByIdGain(idGain);
+    public List<Ticket> getAllTicketOfGain(Integer first,Integer last) {
+        return ticketRepo.findByIdGainNotNull();
     }
 
     @Override
@@ -89,5 +89,10 @@ public class TicketServiceImpl implements TicketService {
         Random r = new Random();
         int n = r.nextInt(listGain.size());
         return listGain.get(n);
+    }
+
+    @Override
+    public List<Ticket> getTicketByIdMagasin(Long idM) {
+        return ticketRepo.findByIdMagasin(idM);
     }
 }

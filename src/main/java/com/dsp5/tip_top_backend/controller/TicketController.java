@@ -25,6 +25,12 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.getAllTicketOfClient(idClient,first,last), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/getAllTicketGain/{first}/{last}")
+    public ResponseEntity<List<Ticket>> getAllTicketGain(@PathVariable("first") Integer first,
+                                                           @PathVariable("last") Integer last){
+        return new ResponseEntity<>(ticketService.getAllTicketOfGain(first,last), HttpStatus.ACCEPTED);
+    }
+
     @PostMapping("/saveTicketMagasin")
     public ResponseEntity<Boolean> saveTicketMagasin(@RequestBody Ticket t){
         return new ResponseEntity<>(ticketService.saveTicketMagasin(t), HttpStatus.ACCEPTED);
@@ -33,6 +39,11 @@ public class TicketController {
     @PostMapping("/saveTicketClient/{numTicket}")
     public ResponseEntity<Boolean> saveTicketClient(@RequestBody Client c, @PathVariable("numTicket") String numTicket){
         return new ResponseEntity<>(ticketService.saveTicketClient(numTicket,c), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/getTicketByIdMagasin/{idM}")
+    public ResponseEntity<List<Ticket>>getTicketByIdMagasin(@PathVariable("idM") Long idM){
+        return new ResponseEntity<>(ticketService.getTicketByIdMagasin(idM),HttpStatus.ACCEPTED);
     }
 
 }
