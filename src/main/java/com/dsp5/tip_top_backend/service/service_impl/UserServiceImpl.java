@@ -150,6 +150,24 @@ public class UserServiceImpl implements UserService {
         return roleRepo.findAllStrRole();
     }
 
+    @Override
+    public Utilisateur updateUser(Utilisateur u) {
+
+       Utilisateur user = userRepo.findById(u.getIdUser()).get();
+       if(user != null){
+
+           user.setAdresse(u.getAdresse());
+           user.setCode_postal(u.getCode_postal());
+           user.setMail(u.getMail());
+           user.setNom(u.getNom());
+           user.setPrenom(u.getPrenom());
+           user.setVille(u.getVille());
+
+           return userRepo.save(user);
+       }
+        return userRepo.save(u);
+    }
+
     @Bean
     public static AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();

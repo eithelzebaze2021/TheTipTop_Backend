@@ -16,4 +16,5 @@ public interface UserService {
     List<Utilisateur> getAllUser();
     LoginResponse login(LoginRequest loginRequest);
     List<String> getAllRoleForPublic();
+    Utilisateur updateUser(Utilisateur u);
 }

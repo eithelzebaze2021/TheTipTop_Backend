@@ -36,6 +36,7 @@ public class UserController {
         return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
+
     @GetMapping("/getUserById/{idU}")
     public ResponseEntity<Utilisateur>getUserById(@PathVariable("idU") Long idUser){
         return new ResponseEntity<>(userService.getUserById(idUser), HttpStatus.ACCEPTED);
@@ -46,6 +47,20 @@ public class UserController {
 
         if(userService.saveUser(u)){
             URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/saveUser").toUriString());
+            return ResponseEntity.created(uri).body(true);
+        }else{
+            return ResponseEntity.badRequest().body(false);
+        }
+
+    }
+
+    @PutMapping("/updateUser")
+    public ResponseEntity<Boolean>updateUser(@RequestBody Utilisateur u){
+
+        Utilisateur userUpdate = userService.updateUser(u);
+
+        if(userUpdate != null){
+            URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api-tip-top-G1/user/updateUser").toUriString());
             return ResponseEntity.created(uri).body(true);
         }else{
             return ResponseEntity.badRequest().body(false);

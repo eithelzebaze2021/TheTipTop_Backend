@@ -72,10 +72,10 @@ public class InitDBUtils implements CommandLineRunner {
         Employe employe1 = new Employe(magasin1,user4);
         this.employeRepo.save(employe1);
 
-        Gain gain1 = this.gainRepo.save(new Gain("Un filtre à thé en acier, idéal pour infuser son thé dans une grande tasse.","assets/img/infuseur_the.png",900000L,"un infuseur à thé", 15L));
-        Gain gain2 = this.gainRepo.save(new Gain("Un filtre à thé en acier, idéal pour infuser son thé dans une grande tasse.","assets/img/thetiptop-the-detox.png",300000L,"une boite de 100g d’un thé détox", 56L));
-        Gain gain3 = this.gainRepo.save(new Gain("Un filtre à thé en acier, idéal pour infuser son thé dans une grande tasse.","assets/img/thetiptop-the-detox.png",150000L,"une boite bis de 100g d’un thé détox",56L));
-        Gain gain4 = this.gainRepo.save(new Gain("Découvrez nos deux thés signatures aux fleurs de cerisier, réunis dans un seul coffret.","assets/img/coffret1.jpg",90000L,"un coffret découverte",39L));
+        Gain gain1 = this.gainRepo.save(new Gain("un infuseur à thé","assets/img/infuseur_the.png",900000L,"Un filtre à thé en acier, idéal pour infuser son thé dans une grande tasse.", 15L));
+        Gain gain2 = this.gainRepo.save(new Gain("une boite de 100g d’un thé détox","assets/img/thetiptop-the-detox.png",300000L,"Un filtre à thé en acier, idéal pour infuser son thé dans une grande tasse.", 56L));
+        Gain gain3 = this.gainRepo.save(new Gain("une boite bis de 100g d’un thé détox","assets/img/thetiptop-the-detox.png",150000L,"Un filtre à thé en acier, idéal pour infuser son thé dans une grande tasse.",56L));
+        Gain gain4 = this.gainRepo.save(new Gain("un coffret découverte","assets/img/coffret1.jpg",90000L,"Découvrez nos deux thés signatures aux fleurs de cerisier, réunis dans un seul coffret.",39L));
 
         this.ticketRepo.save(new Ticket(client1.getIdClient(), gain1.getIdGain(), magasin1.getIdMagasin(),50L,"1235489643",false,gain1,client1,magasin1));
         this.ticketRepo.save(new Ticket(client2.getIdClient(), gain4.getIdGain(), magasin1.getIdMagasin(),60L,"1235489569",true,gain4,client2,magasin1));
