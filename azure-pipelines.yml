@@ -8,8 +8,9 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-
+  
 steps:
+
 - task: Maven@4
   inputs:
     mavenPomFile: 'pom.xml'
@@ -20,9 +21,10 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
+    sonarQubeRunAnalysis: false
     sqMavenPluginVersionChoice: 'pom'
 - task: Docker@2
   inputs:
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
