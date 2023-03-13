@@ -39,7 +39,7 @@ steps:
     DeploymentType: 'CustomContainer'
     UseStagingDeployment: true
     RegistryServer: 'eithelzebaze/furiosduck-grp1'
-    RegistryUsername: 'Innocent-2013'
+    RegistryUsername: 'eithelzebaze'
     RegistryPassword: 'Innocent-2013'
     ImageName: '21'
     
