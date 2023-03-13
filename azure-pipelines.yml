@@ -25,6 +25,7 @@ steps:
     sqMavenPluginVersionChoice: 'pom'
 - task: Docker@2
   inputs:
-    containerRegistry: 'furiousduckdocker'
+    containerRegistry: 'furiousduckdockerhub'
+    repository: 'eithelzebaze/furiosduck-grp1'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
