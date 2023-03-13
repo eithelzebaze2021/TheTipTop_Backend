@@ -32,13 +32,13 @@ steps:
 
 - task: AzureSpringCloud@0
   inputs:
-     azureSubscription: 'Azure subscription 1(bbba1c5d-93ca-49bd-8365-50b203245cb4)'
-     Action: 'Deploy'
-     AzureSpringCloud: '/subscriptions/bbba1c5d-93ca-49bd-8365-50b203245cb4/resourceGroups/FuriousDuckRes/providers/Microsoft.AppPlatform/Spring/spring-tip-top'
-     AppName: 'spring-tip-top'
-     DeploymentType: 'CustomContainer'
-     UseStagingDeployment: true
-     RegistryUsername: 'eithelzebaze'
-     RegistryPassword: 'Innocent-2013'
-     ImageName: 'eithelzebaze/furiosduck-grp1:21'
+    azureSubscription: 'Azure subscription 1(bbba1c5d-93ca-49bd-8365-50b203245cb4)'
+    Action: 'Deploy'
+    AzureSpringCloud: '/subscriptions/bbba1c5d-93ca-49bd-8365-50b203245cb4/resourceGroups/FuriousDuckRes/providers/Microsoft.AppPlatform/Spring/spring-tip-top'
+    AppName: 'spring-tip-top'
+    DeploymentType: 'CustomContainer'
+    UseStagingDeployment: false
+    RegistryUsername: 'eithelzebaze'
+    RegistryPassword: 'Innocent-2013'
+    ImageName: 'eithelzebaze/furiosduck-grp1:21'
     
