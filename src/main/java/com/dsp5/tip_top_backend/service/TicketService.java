@@ -9,11 +9,11 @@ import java.util.List;
 public interface TicketService {
 
     Ticket getTicketById(Long idTicket);
-    Boolean saveTicketClient(String numTicket, Client C);
+    Boolean saveTicketClient(String numTicket, Long idClient);
     Boolean saveTicketMagasin(Ticket t);
     List<Ticket> getAllTicket();
-    List<Ticket> getAllTicketOfClient(Long idClient, Integer first,Integer last);
-    List<Ticket> getAllTicketOfGain(Integer first,Integer last);
+    List<Ticket> getAllTicketOfClient(Long idClient);
+    List<Ticket> getAllTicketOfGain();
     Gain attribuerGain(List<Gain> listGain);
     List<Ticket> getTicketByIdMagasin(Long idM);
 }
