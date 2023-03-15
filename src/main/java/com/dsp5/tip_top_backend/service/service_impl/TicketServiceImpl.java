@@ -4,6 +4,7 @@ import com.dsp5.tip_top_backend.model.Client;
 import com.dsp5.tip_top_backend.model.Gain;
 import com.dsp5.tip_top_backend.model.Ticket;
 import com.dsp5.tip_top_backend.repository.GainRepo;
+import com.dsp5.tip_top_backend.repository.ClientRepo;
 import com.dsp5.tip_top_backend.repository.TicketRepo;
 import com.dsp5.tip_top_backend.service.GainService;
 import com.dsp5.tip_top_backend.service.TicketService;
