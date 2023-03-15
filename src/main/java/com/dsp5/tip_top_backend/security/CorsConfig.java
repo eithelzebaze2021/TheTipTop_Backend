@@ -17,7 +17,7 @@ public class CorsConfig {
                         .allowedHeaders("*")
                         .exposedHeaders("Access-Control-Expose-Headers")
                         .exposedHeaders("*")
-                        .allowedOrigins("http://localhost:4200/,https://tiptopgrp1.azurewebsites.net/");
+                        .allowedOrigins("http://localhost:4200","https://tiptopgrp1.azurewebsites.net");
             }
         };
     }
