@@ -18,17 +18,14 @@ public class TicketController {
     @Autowired
     private TicketService ticketService;
 
-    @GetMapping("/getAllTicketClient/{idClient}/{first}/{last}")
-    public ResponseEntity<List<Ticket>> getAllTicketClient(@PathVariable("idClient") Long idClient,
-                                                           @PathVariable("first") Integer first,
-                                                           @PathVariable("last") Integer last){
-        return new ResponseEntity<>(ticketService.getAllTicketOfClient(idClient,first,last), HttpStatus.ACCEPTED);
+    @GetMapping("/getAllTicketClient/{idClient}")
+    public ResponseEntity<List<Ticket>> getAllTicketClient(@PathVariable("idClient") Long idClient){
+        return new ResponseEntity<>(ticketService.getAllTicketOfClient(idClient), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/getAllTicketGain/{first}/{last}")
-    public ResponseEntity<List<Ticket>> getAllTicketGain(@PathVariable("first") Integer first,
-                                                           @PathVariable("last") Integer last){
-        return new ResponseEntity<>(ticketService.getAllTicketOfGain(first,last), HttpStatus.ACCEPTED);
+   @GetMapping("/getAllTicketGain")
+    public ResponseEntity<List<Ticket>> getAllTicketGain(){
+        return new ResponseEntity<>(ticketService.getAllTicketOfGain(), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("/saveTicketMagasin")
@@ -36,9 +33,9 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.saveTicketMagasin(t), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/saveTicketClient/{numTicket}")
-    public ResponseEntity<Boolean> saveTicketClient(@RequestBody Client c, @PathVariable("numTicket") String numTicket){
-        return new ResponseEntity<>(ticketService.saveTicketClient(numTicket,c), HttpStatus.ACCEPTED);
+   @PostMapping("/saveTicketClient/{idClient}/{numTicket}")
+    public ResponseEntity<Boolean> saveTicketClient(@PathVariable("idClient") Long idClient, @PathVariable("numTicket") String numTicket){
+        return new ResponseEntity<>(ticketService.saveTicketClient(numTicket,idClient), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/getTicketByIdMagasin/{idM}")
