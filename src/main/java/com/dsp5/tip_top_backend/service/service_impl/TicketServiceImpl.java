@@ -38,9 +38,11 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Boolean saveTicketClient(String numTicket, Client C) {
+    public Boolean saveTicketClient(String numTicket, Long idClient) {
 
         List<Gain> listgainDispo = gainRepo.findGainDispo();
+
+        Client C = clientRepo.findById(idClient).get();
 
         Gain gainClient = attribuerGain(listgainDispo);
 
@@ -49,8 +51,11 @@ public class TicketServiceImpl implements TicketService {
         Ticket t = ticketRepo.findByNumTicket(numTicket);
 
         if(t!=null){
-            t.setGain(gainService.saveGain(gainClient));
+            var g = gainService.saveGain(gainClient);
+            t.setGain(g);
             t.setClient(C);
+            t.setIdGain(g.getIdGain());
+            t.setIdClient(C.getIdClient());
             ticketRepo.save(t);
             return true;
         }else {
@@ -73,13 +78,13 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> getAllTicketOfClient(Long idClient,Integer first,Integer last) {
+    public List<Ticket> getAllTicketOfClient(Long idClient) {
 
-        return ticketRepo.findByIdClient(idClient,first,last);
+        return ticketRepo.findByIdClient(idClient);
     }
 
     @Override
-    public List<Ticket> getAllTicketOfGain(Integer first,Integer last) {
+    public List<Ticket> getAllTicketOfGain() {
         return ticketRepo.findByIdGainNotNull();
     }
 
