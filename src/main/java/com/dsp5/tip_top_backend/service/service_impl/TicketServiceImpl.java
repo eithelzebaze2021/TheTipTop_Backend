@@ -28,6 +28,9 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private GainRepo gainRepo;
+    
+    @Autowired
+    private ClientRepo clientRepo;
 
     @Autowired
     private GainService gainService;
