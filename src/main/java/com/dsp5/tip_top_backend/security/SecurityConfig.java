@@ -31,9 +31,9 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("https://tiptopapi.azurewebsites.net/api-tip-top-G1/user/login",
-                        "https://tiptopapi.azurewebsites.net/api-tip-top-G1/user/saveUser",
-                        "https://tiptopapi.azurewebsites.net/api-tip-top-G1/user/getAllRoleForPublic").permitAll()
+                .antMatchers("/api-tip-top-G1/user/login",
+                        "/api-tip-top-G1/user/saveUser",
+                        "/api-tip-top-G1/user/getAllRoleForPublic").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
