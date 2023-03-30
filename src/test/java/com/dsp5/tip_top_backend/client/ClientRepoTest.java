@@ -18,21 +18,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ClientRepoTest {
 
     @Autowired
-    private ClientRepo clientTest;
+    private ClientRepo clientRepo;
     @Autowired
-    private RoleRepo roleTest;
+    private RoleRepo roleRepo;
     @Test
     void findByIdUser() {
         Role role = new Role(
-                1,
+                0,
                 "client"
         );
-        roleTest.save(role);
+        role = roleRepo.save(role);
 
         //given
        Utilisateur utilisateur = new Utilisateur(
-               1l,
-               1,
+
+               role.getIdRole(),
                "Fopa",
                "Armelle",
                "France",
@@ -42,14 +42,14 @@ public class ClientRepoTest {
                "Vincenne"
        );
         Client client = new Client(
-                1L,
+
                 utilisateur
 
         );
-        clientTest.save(client);
+        clientRepo.save(client);
 
         // when
-        Optional<Client> clientOptional=clientTest.findByIdUser(utilisateur.getIdUser());
+        Optional<Client> clientOptional=clientRepo.findByIdUser(utilisateur.getIdUser());
 
         //then
         assertTrue(clientOptional.isPresent());
