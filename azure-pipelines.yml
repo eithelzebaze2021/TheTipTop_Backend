@@ -8,10 +8,8 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-
+  
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
 - task: Maven@4
   inputs:
@@ -19,12 +17,16 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    sonarQubeRunAnalysis: false
+    sqMavenPluginVersionChoice: 'pom'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'furiousduckdockerhub'
+    repository: 'eithelzebaze/furiosduck-grp1'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    
