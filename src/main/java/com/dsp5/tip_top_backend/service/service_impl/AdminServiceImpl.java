@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -17,6 +18,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private RoleRepo roleRepo;
+
+    public AdminServiceImpl() {
+    }
+
+    public AdminServiceImpl(RoleRepo roleRepo) {
+        this.roleRepo = roleRepo;
+    }
 
     @Override
     public List<Role> getAllRole() {

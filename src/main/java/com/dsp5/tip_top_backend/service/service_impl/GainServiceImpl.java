@@ -20,6 +20,13 @@ public class GainServiceImpl implements GainService {
     @Autowired
     private GainRepo gainRepo;
 
+    public GainServiceImpl() {
+    }
+
+    public GainServiceImpl(GainRepo gainRepo) {
+        this.gainRepo = gainRepo;
+    }
+
     @Override
     public Gain getGainById(Long idGain) {
         return gainRepo.findById(idGain).get();

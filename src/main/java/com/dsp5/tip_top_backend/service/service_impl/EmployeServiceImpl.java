@@ -25,6 +25,17 @@ public class EmployeServiceImpl implements EmployeService {
     @Autowired
     private MagasinRepo magasinRepo;
 
+    public EmployeServiceImpl() {
+    }
+
+    public EmployeServiceImpl(EmployeRepo employeRepo) {
+        this.employeRepo = employeRepo;
+    }
+
+    public EmployeServiceImpl(MagasinRepo magasinRepo) {
+        this.magasinRepo = magasinRepo;
+    }
+
     @Override
     public Employe getEmployeById(Long idEmploye) {
         return employeRepo.findById(idEmploye).get();
