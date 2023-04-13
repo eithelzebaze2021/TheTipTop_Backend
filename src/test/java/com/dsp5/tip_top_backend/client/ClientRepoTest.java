@@ -23,13 +23,13 @@ public class ClientRepoTest {
     private RoleRepo roleRepo;
     @Test
     void findByIdUser() {
+        //given
         Role role = new Role(
                 0,
                 "client"
         );
         role = roleRepo.save(role);
 
-        //given
        Utilisateur utilisateur = new Utilisateur(
 
                role.getIdRole(),

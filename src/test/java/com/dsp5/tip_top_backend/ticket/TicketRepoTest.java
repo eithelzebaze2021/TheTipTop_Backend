@@ -104,7 +104,7 @@ public class TicketRepoTest {
          ticketRepo.save(ticket);
 
         //when
-        List<Ticket> ticketList = ticketRepo.findByIdClient(client.getIdClient(),0,4);
+        List<Ticket> ticketList = ticketRepo.findByIdClient(client.getIdClient());
        // List<Ticket> ticketList1 = ticketRepo.findByIdClient(2L,0,20);
 
         //then

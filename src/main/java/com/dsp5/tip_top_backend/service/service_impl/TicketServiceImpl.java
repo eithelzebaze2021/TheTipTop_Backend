@@ -36,6 +36,16 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     private GainService gainService;
 
+    public TicketServiceImpl() {
+    }
+
+    public TicketServiceImpl(TicketRepo ticketRepo, GainRepo gainRepo, ClientRepo clientRepo, GainService gainService) {
+        this.ticketRepo = ticketRepo;
+        this.gainRepo = gainRepo;
+        this.clientRepo = clientRepo;
+        this.gainService = gainService;
+    }
+
     @Override
     public Ticket getTicketById(Long idTicket) {
         return ticketRepo.findById(idTicket).get();

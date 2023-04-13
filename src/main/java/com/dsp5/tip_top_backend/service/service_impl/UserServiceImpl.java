@@ -47,6 +47,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    public UserServiceImpl() {
+    }
+
+    public UserServiceImpl(UtilisateurRepo userRepo, ClientService clientService, RoleRepo roleRepo, BCryptPasswordEncoder passwordEncoder, JwtUtils jwtUtils, AuthenticationManager authenticationManager) {
+        this.userRepo = userRepo;
+        this.clientService = clientService;
+        this.roleRepo = roleRepo;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtils = jwtUtils;
+        this.authenticationManager = authenticationManager;
+    }
+
     @Override
     public Utilisateur getUserById(Long idUser) {
         return userRepo.findById(idUser).get();
