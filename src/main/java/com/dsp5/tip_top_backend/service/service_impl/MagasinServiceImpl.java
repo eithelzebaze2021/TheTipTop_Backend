@@ -20,6 +20,13 @@ public class MagasinServiceImpl implements MagasinService {
     @Autowired
     private MagasinRepo magasinRepo;
 
+    public MagasinServiceImpl() {
+    }
+
+    public MagasinServiceImpl(MagasinRepo magasinRepo) {
+        this.magasinRepo = magasinRepo;
+    }
+
     @Override
     public Magasin getMagasinById(Long idMagasin) {
         return magasinRepo.findById(idMagasin).get();

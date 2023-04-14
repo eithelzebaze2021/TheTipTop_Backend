@@ -32,6 +32,15 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private GainRepo gainRepo;
 
+    public ClientServiceImpl() {
+    }
+
+    public ClientServiceImpl(ClientRepo clientRepo, TicketRepo ticketRepo, GainRepo gainRepo) {
+        this.clientRepo = clientRepo;
+        this.ticketRepo = ticketRepo;
+        this.gainRepo = gainRepo;
+    }
+
     @Override
     public Client getClientByIdClient(Long idClient) {
         log.debug("Trouver le client dont l'idClient est : {} ", idClient);
