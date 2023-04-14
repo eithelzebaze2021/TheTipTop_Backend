@@ -104,4 +104,16 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> getTicketByIdMagasin(Long idM) {
         return ticketRepo.findByIdMagasin(idM);
     }
+
+
+    @Override
+    public Ticket updateTicket(Long t) {
+        Ticket ticket = ticketRepo.findById(t).get();
+        if(ticket != null){
+            ticket.setGainRecu(true);
+            return ticketRepo.save(ticket);
+        }
+        return null;
+    }
+
 }

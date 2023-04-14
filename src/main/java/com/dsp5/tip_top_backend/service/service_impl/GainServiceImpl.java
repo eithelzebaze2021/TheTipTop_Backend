@@ -1,6 +1,7 @@
 package com.dsp5.tip_top_backend.service.service_impl;
 
 import com.dsp5.tip_top_backend.model.Gain;
+import com.dsp5.tip_top_backend.model.Utilisateur;
 import com.dsp5.tip_top_backend.repository.GainRepo;
 import com.dsp5.tip_top_backend.service.GainService;
 import org.apache.logging.log4j.LogManager;

@@ -27,7 +27,7 @@ public class EmployeController {
 
     @GetMapping("/getEmployeByIdUser/{idU}")
     public ResponseEntity<Employe>getEmployeByIdUser(@PathVariable("idU") Long idU){
-        return new ResponseEntity<>(employeService.getEmployeByIdUser(idU), HttpStatus.OK);
+        return new ResponseEntity<>(employeService.getEmployeByIdUser(idU), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/getEmployeConnect")
